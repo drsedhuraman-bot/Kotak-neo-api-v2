@@ -28,6 +28,68 @@ Then import the package:
 import neo_api_client
 ```
 
+## Trading Terminal (Nexz Bot UI)
+
+This repository now includes a web trading terminal page and a lightweight local bridge server.
+
+- Terminal page: `docs/nifty_scalper_terminal.html`
+- Bridge server: `bridge.py`
+
+### Run Locally
+
+```sh
+python bridge.py
+```
+
+Windows one-command launcher:
+
+```bat
+start_terminal.bat
+```
+
+Or with PowerShell:
+
+```powershell
+.\start_terminal.ps1
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8765
+```
+
+Bridge ports used by default:
+
+- HTTP API: `8765`
+- WebSocket feed: `8766`
+
+### Bridge Endpoints Used By The UI
+
+- `GET /ping`
+- `POST /config`
+- `POST /bar_size`
+- `GET /params`
+- `POST /params`
+- `POST /order/place`
+- `POST /order/exit`
+- `POST /auth`
+- `POST /auth/otp`
+- `POST /auth/totp`
+- `POST /auth/live-mode`
+- `GET /ngrok`
+
+### Notes
+
+- The included bridge starts in simulation mode and streams synthetic market data to the UI.
+- The terminal now defaults to Kotak broker selection (you still must authenticate before live orders).
+- Broker `auto` now resolves to Kotak when authenticated, otherwise falls back to paper.
+- Kotak authentication now uses the SDK TOTP flow: initialize the client, then submit mobile number, UCC, TOTP, and MPIN.
+- Kotak execution stays in simulation until you explicitly switch the UI to `Real Kotak LIVE`.
+- Live Kotak orders resolve `trading_symbol` from the bundled F&O master using `symbol + expiry_code + strike + option_type`.
+- Kite auth endpoints in this bridge are placeholders and return a not supported response.
+- The terminal sends Kotak live order fields (`exchange_segment`, `expiry_code`, `quantity`, `transaction_type`, `validity`) to the bridge.
+
 ### Setuptools
 
 Install via [Setuptools]
