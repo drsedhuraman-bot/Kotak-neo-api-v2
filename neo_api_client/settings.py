@@ -182,10 +182,9 @@ ReqTypeValues = {
     "FORCE_CONNECTION": "fcn"
 }
 
-#neo_fin_key = "f784e198-bda7-439e-a1a6-177f432460b9"
-#neo_fin_key = "bQJNkL5z8m4aGcRgjDvXhHfSx7VpZnE"
+
 #live_fin_key = "neotradeapi"
-#live_fin_key = "X6Nk8cQhUgGmJ2vBdWw4sfzrz4L5En"
+
 market_protection = 0
 QuotesChannel = 1
 
